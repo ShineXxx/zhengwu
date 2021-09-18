@@ -21,7 +21,7 @@ spring:
     execution:
       thread-name-prefix: task-pool-
       pool:
-        core-size: 4
+        core-size: 10
         max-size: 50
         queue-capacity: 10000
     scheduling:
@@ -46,6 +46,7 @@ logging:
     root: INFO
     org.springframework.statemachine: off
     org.apache.pdfbox.rendering: off
+    org.mongodb.driver: off
 
 feign:
   client:

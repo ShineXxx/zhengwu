@@ -1,9 +1,29 @@
 logging:
   level:
-    root: INFO
+    root: debug
     org.springframework.statemachine: off
   config: classpath:logback/logback.xml
   file:
     max-size: 100MB
     max-history: 90
     path: ./logs
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/approval
+  rabbitmq:
+    addresses: 10.0.103.89
+    password: guest
+    port: 5672
+    username: guest
+    listener:
+      direct:
+        retry:
+          enabled: true
+          initial-interval: 2s
+        prefetch: 1
+      simple:
+        acknowledge-mode: manual
+    publisher-returns: true
+    publisher-confirm-type: correlated

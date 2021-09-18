@@ -1,5 +1,7 @@
 package com.shine.approval.service;
 
+import com.shine.approval.module.CommitVo;
+
 /**
  * 审批服务
  *
@@ -20,6 +22,6 @@ public interface IApprovalService {
      *
      * @param o
      */
-    void commit(Object o);
+    void commit(CommitVo o);
 
 }
