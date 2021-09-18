@@ -2,8 +2,7 @@ package com.shine.approval.task;
 
 import com.alibaba.fastjson.JSON;
 import com.shine.approval.dao.entity.ApprovalDocument;
-import com.shine.approval.service.ApprovalService;
-import com.shine.approval.service.ReceiptRecordService;
+import com.shine.approval.service.IDataService;
 import com.shine.approval.statemachine.approval.ApprovalEvents;
 import com.shine.approval.statemachine.service.ApprovalStatemachineService;
 import com.shine.approval.task.dto.ImageList;
@@ -33,9 +32,7 @@ public class ProcessingMsgHandler {
     @Resource
     ApprovalStatemachineService approvalStatemachineService;
     @Resource
-    ReceiptRecordService receiptRecordService;
-    @Resource
-    ApprovalService approvalService;
+    IDataService dataService;
 
     /**
      * 解析算法那正确处理的消息
@@ -87,7 +84,7 @@ public class ProcessingMsgHandler {
 //                    execute(recordId, BatchEvents.PROCESS_SUCCESS_MSG);
                 } else {
                     // 获取审批材料
-                    approvalDocumentList = approvalService.getAllApprovalDocListByReceiptRecordId(recordId);
+                    approvalDocumentList = dataService.getSecondaryMaterialList(recordId);
                     // 清除材料忽略的mongo信息
                     clearIgnoreLog(recordId);
 
@@ -100,7 +97,7 @@ public class ProcessingMsgHandler {
                     }
 
                     // 更新状态为处理完成
-                    receiptRecordService.setFinished(recordId);
+                    dataService.updateStatusFinished(recordId);
                     approvalStatemachineService.execute(recordId, ApprovalEvents.PROCESS_SUCCESS_MSG);
                 }
 

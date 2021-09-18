@@ -1,24 +1,20 @@
 package com.shine.approval.service.impl;
 
-import com.shine.approval.dao.entity.ApprovalDocument;
-import com.shine.approval.service.ApprovalService;
+import com.shine.approval.service.IApprovalService;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author zhaoyao
  */
 @Service
-public class ApprovalServiceImpl implements ApprovalService {
+public class ApprovalServiceImpl implements IApprovalService {
     @Override
-    public void commit(Object o) {
-
+    public String init(String materialName) {
+        return "";
     }
 
     @Override
-    public List<ApprovalDocument> getAllApprovalDocListByReceiptRecordId(String recordId) {
-        return new ArrayList<>();
+    public void commit(Object o) {
+
     }
 }
