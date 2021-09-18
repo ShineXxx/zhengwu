@@ -1,0 +1,55 @@
+server:
+  port: 6677
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  application:
+    name: approval-service
+  profiles:
+    active: local
+  jackson:
+    # 输出时间为 时间戳
+    #    serialization:
+    #      write-dates-as-timestamps: true
+    # 输出为指定格式字符串
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  task:
+    execution:
+      thread-name-prefix: task-pool-
+      pool:
+        core-size: 4
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: scheduling-
+      pool:
+        size: 2
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.shine.dao.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+logging:
+  level:
+    root: INFO
+    org.springframework.statemachine: off
+    org.apache.pdfbox.rendering: off
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 6000

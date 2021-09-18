@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: INFO
+    org.springframework.statemachine: off
+  config: classpath:logback/logback.xml
+  file:
+    max-size: 100MB
+    max-history: 90
+    path: ./logs
