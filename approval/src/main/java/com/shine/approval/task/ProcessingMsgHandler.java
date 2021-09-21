@@ -2,6 +2,10 @@ package com.shine.approval.task;
 
 import com.alibaba.fastjson.JSON;
 import com.shine.approval.dao.entity.ApprovalDocument;
+import com.shine.approval.quartz.QuartzJobManagement;
+import com.shine.approval.quartz.dynamic.CallBackNoticeJob;
+import com.shine.approval.quartz.util.DateUtils;
+import com.shine.approval.quartz.util.NoticeClockUtil;
 import com.shine.approval.service.IDataService;
 import com.shine.approval.statemachine.approval.ApprovalEvents;
 import com.shine.approval.statemachine.service.ApprovalStatemachineService;
@@ -10,12 +14,16 @@ import com.shine.common.module.dto.ImageList;
 import com.shine.common.module.dto.Output;
 import com.shine.common.utils.Json;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +41,8 @@ public class ProcessingMsgHandler {
     ApprovalStatemachineService approvalStatemachineService;
     @Resource
     IDataService dataService;
+    @Resource
+    QuartzJobManagement quartzJobManagement;
 
     /**
      * 解析算法那正确处理的消息
@@ -103,6 +113,9 @@ public class ProcessingMsgHandler {
 
                 // 保存处理后的 json
                 saveOutput(savedOutput, approvalDocumentList);
+
+                // 进行回调通知
+                triggerCallBackNotice();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,6 +158,22 @@ public class ProcessingMsgHandler {
         logger.debug("2. Build AudioResultDto");
         logger.info("3. 保存到MongoDB成功, 记录编号为: {} ", "result.getAudioRecordId()");
         return "{}";
+    }
+
+    public void triggerCallBackNotice() {
+        Integer noticeTimes = 0;
+        Map<String, String> dataMap = new HashMap<>(16);
+        dataMap.put("recordDetailId", "1");
+        int nextClockGap = NoticeClockUtil.getNextClockGap(noticeTimes);
+        if (nextClockGap == 0) {
+            // 通知次数达到上限，通知失败
+            return;
+        }
+        Date activeTime = DateTime.now().plusSeconds(nextClockGap).toDate();
+        quartzJobManagement.removeJob("1");
+        quartzJobManagement.addJob("1", CallBackNoticeJob.class, DateUtils.getCron(activeTime), dataMap);
+        logger.info("记录：{}, 添加第{}次通知任务，{} 开始执行", "1", noticeTimes + 1, activeTime);
+        // 更新通知状态和统计
     }
 
 }
