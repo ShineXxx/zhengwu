@@ -1,4 +1,4 @@
-package com.shine.approval.task.dto;
+package com.shine.common.module.dto;
 
 import lombok.Data;
 import lombok.ToString;

@@ -11,12 +11,12 @@ logging:
 spring:
   data:
     mongodb:
-      uri: mongodb://192.168.33.10:27017/approval
+      uri: mongodb://127.0.0.1:27017/approval
   rabbitmq:
-    addresses: 192.168.33.10
-    password: admin
+    addresses: 10.0.103.89
+    password: guest
     port: 5672
-    username: admin
+    username: guest
     listener:
       direct:
         retry:

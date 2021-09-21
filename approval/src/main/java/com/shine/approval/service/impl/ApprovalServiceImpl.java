@@ -5,8 +5,8 @@ import com.shine.approval.dao.entity.ReceiptRecord;
 import com.shine.approval.dao.entity.ReceiptRecordImage;
 import com.shine.approval.module.CommitVo;
 import com.shine.approval.service.IApprovalService;
-import com.shine.approval.mq.TaskSender;
-import com.shine.approval.task.dto.Input;
+import com.shine.approval.mq.InputProducer;
+import com.shine.common.module.dto.Input;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ApprovalServiceImpl implements IApprovalService {
 
     @Resource
-    TaskSender taskSender;
+    InputProducer inputProducer;
 
     @Override
     public String init(String materialName) {
@@ -63,7 +63,7 @@ public class ApprovalServiceImpl implements IApprovalService {
             inputImages.add(inputImage);
         }
         // 异步构建和发送任务
-        taskSender.buildTask(input);
+        inputProducer.buildTask(input);
     }
 
     private ReceiptRecord getRecord(String recordId) {

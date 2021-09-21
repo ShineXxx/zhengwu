@@ -1,4 +1,4 @@
-package com.shine.approval.mq;
+package com.shine.algorithm.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -46,12 +46,12 @@ public class RabbitMqConfig {
 
     @Bean("producerExchange")
     public DirectExchange exchange() {
-        return new DirectExchange("task.input");
+        return new DirectExchange("task.output");
     }
 
     @Bean
     public Queue queue() {
-        return new Queue("task.input.requests");
+        return new Queue("task.output.requests");
     }
 
     @Bean
@@ -59,6 +59,6 @@ public class RabbitMqConfig {
                            Queue queue) {
         return BindingBuilder.bind(queue)
                 .to(exchange)
-                .with("input");
+                .with("output");
     }
 }

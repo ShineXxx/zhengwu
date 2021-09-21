@@ -21,8 +21,8 @@ spring:
     execution:
       thread-name-prefix: task-pool-
       pool:
-        core-size: 10
-        max-size: 50
+        core-size: 100
+        max-size: 10000
         queue-capacity: 10000
     scheduling:
       thread-name-prefix: scheduling-
