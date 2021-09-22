@@ -65,7 +65,7 @@ public class CallBackNoticeJob implements Job {
         }
 
         // 通知失败: 再次尝试触发下一次通知
-        processingMsgHandler.triggerCallBackNotice();
+//        processingMsgHandler.triggerCallBackNotice();
         Integer noticeTimes = 1;
         logger.info("本次：{}/{} 通知失败，message: {}, 稍后尝试第: {}/{} 次通知", noticeTimes, maxNoticeTimes, "", noticeTimes + 1, maxNoticeTimes);
     }

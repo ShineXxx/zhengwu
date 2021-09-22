@@ -28,7 +28,7 @@ public abstract class AbstractTask {
      */
     private volatile TaskStatus status = TaskStatus.READY;
 
-    AbstractTask(String taskId) {
+    public AbstractTask(String taskId) {
         this.taskId = taskId;
     }
 
@@ -78,14 +78,14 @@ public abstract class AbstractTask {
      *
      * @param dataContext 所有 task 上下文
      */
-    abstract void doAction(DataContext dataContext);
+    public abstract void doAction(DataContext dataContext);
 
     /**
      * 任务依赖的其他任务id
      *
      * @return taskId list
      */
-    abstract List<String> getDependencies();
+    public abstract List<String> getDependencies();
 
     @Override
     public boolean equals(Object o) {

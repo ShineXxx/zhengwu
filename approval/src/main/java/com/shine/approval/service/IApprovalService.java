@@ -24,4 +24,11 @@ public interface IApprovalService {
      */
     void commit(CommitVo o);
 
+    /**
+     * 提交材料 版本2
+     *
+     * @param o
+     */
+    void commitV2(CommitVo o);
+
 }
