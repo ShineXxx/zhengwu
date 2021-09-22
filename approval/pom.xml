@@ -125,6 +125,13 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.1.2</version>
         </dependency>
+        <!-- 图结构 - 任务编排 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.1.1-jre</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

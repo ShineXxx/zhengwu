@@ -1,4 +1,4 @@
-package com.shine.approval.module;
+package com.shine.approval.module.vo;
 
 import lombok.Data;
 import lombok.ToString;

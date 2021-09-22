@@ -1,6 +1,6 @@
 package com.shine.approval.service;
 
-import com.shine.approval.module.CommitVo;
+import com.shine.approval.module.vo.CommitVo;
 
 /**
  * 审批服务

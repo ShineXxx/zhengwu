@@ -1,7 +1,7 @@
 package com.shine.approval.api;
 
 import com.shine.approval.dao.service.IRecordStatusDaoService;
-import com.shine.approval.module.CommitVo;
+import com.shine.approval.module.vo.CommitVo;
 import com.shine.approval.service.IApprovalService;
 import com.shine.approval.service.ISearchService;
 import com.shine.approval.statemachine.approval.ApprovalState;

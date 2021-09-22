@@ -3,7 +3,7 @@ package com.shine.approval.service.impl;
 import cn.hutool.core.lang.UUID;
 import com.shine.approval.dao.entity.ReceiptRecord;
 import com.shine.approval.dao.entity.ReceiptRecordImage;
-import com.shine.approval.module.CommitVo;
+import com.shine.approval.module.vo.CommitVo;
 import com.shine.approval.service.IApprovalService;
 import com.shine.approval.mq.InputProducer;
 import com.shine.common.module.dto.Input;

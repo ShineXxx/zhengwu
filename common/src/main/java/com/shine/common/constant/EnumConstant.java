@@ -82,8 +82,8 @@ public final class EnumConstant {
         SCAN("扫描"),
         FILE("文件"),
         CERT("证照库"),
-        BB_GENERATE("帮办制作"),
-        BB_UPLOAD("用户自备");
+        GENERATE("帮办制作"),
+        UPLOAD("用户自备");
 
         private String desc;
 
