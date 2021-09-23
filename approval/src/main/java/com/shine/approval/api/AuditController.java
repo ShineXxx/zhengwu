@@ -36,7 +36,7 @@ public class AuditController {
 
     @ApiOperation(value = "进入审批", httpMethod = "GET")
     @GetMapping("/init")
-    public Result<?> sendToPdsc(@RequestParam String materialName) {
+    public Result<?> init(@RequestParam String materialName) {
         String recordId = approvalService.init(materialName);
         return ResultFactory.wrapper(recordId);
     }
